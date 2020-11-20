@@ -49,6 +49,9 @@ const StyledNav = styled.header`
 function Navbar() {
     const history = useHistory()
     const [login, setLogin] = useState("Register/Login")
+    const logout = ()=> {
+        
+    }
   return (
     <StyledNav>
       <nav>
@@ -57,6 +60,7 @@ function Navbar() {
           <li>
             <a href="/login" >{login}</a>
           </li>
+
 
         </ul>
       </nav>

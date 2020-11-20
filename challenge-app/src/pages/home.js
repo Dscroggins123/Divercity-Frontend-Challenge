@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import jumboPhoto from "../images/hands.png";
 import styled from "styled-components";
-import Applybtn from "../components/ApplyBtn"
+
 import ApplyBtn from "../components/ApplyBtn";
 
 const StyledHome = styled.section`
@@ -51,7 +51,7 @@ const StyledHome = styled.section`
     background-image: url(${jumboPhoto});
     background-repeat: no-repeat;
     background-size: 100% 100%;
-
+    
     width: 100%;
     height: 60vh;
     justify-content: center;
@@ -117,7 +117,11 @@ const StyledHome = styled.section`
       height:127px;
       overflow:scroll;
   }
-  
+  .error{
+      font-size:12px;
+      color:black;
+      
+  }
   
 `;
 
@@ -125,6 +129,7 @@ function Home() {
   const [listings, setListings] = useState();
   const [user, setUser] = useState();
   const [option, setOption] = useState('location');
+ 
 
   useEffect(() => {
     API.getAllListings()
@@ -133,6 +138,14 @@ function Home() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      setUser(JSON.parse(localStorage.getItem("currentUser")));
+
+    }
+    
+  }, [])
 
   const optionChange = (e) => {
       setOption(e.target.value)
@@ -143,6 +156,7 @@ function Home() {
  
 
   console.log(listings);
+  console.log(user)
   
   return (
     <StyledHome>
@@ -161,7 +175,7 @@ function Home() {
               <option value="skill">Skill Tag</option>
             </select>{" "}
             
-            <input type="checkbox" className="inputField"></input>{" "}
+            <input type="text" className="inputField"></input>{" "}
             <button> Search</button>
           </h3>
         </div>
@@ -180,7 +194,7 @@ function Home() {
                       <br />
                       <p className='description'>{listing.description}</p>
                       <br />
-                      <ApplyBtn/>
+                      <ApplyBtn user={user}  /> {user === undefined? <p className="error"> Please Login or Sign up to apply</p>: ""}
                     </div>
                   </div>
                 </div>

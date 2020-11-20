@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from  "styled-components";
 import {useHistory} from 'react-router-dom'
 
@@ -7,18 +7,25 @@ const StyledButton = styled.button`
 background-color:#7497AA;
 border:none;
 border-radius:5px;
-justify-content:center;
+
 color:white;
 
 `
 
 
 
-function ApplyBtn(){
+function ApplyBtn({user}){
     const history = useHistory()
+    
+    const apply = () => {
+        if (user === undefined){return}
+        else{history.push("/application")
+        }
+    }
+    
     return( 
         <StyledButton>
-        <a onClick={()=>history.push("/application")}>Apply</a>
+        <a onClick={apply}>Apply</a> 
         </StyledButton>
     )
 }

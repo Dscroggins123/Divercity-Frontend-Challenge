@@ -13,4 +13,7 @@ export default {
   login: function (data) {
     return axios.post(BASEURL + "login", data);
   },
+  application:function(data){
+    return axios.post(BASEURL + `jobs/2/apply/`, data)
+  }
 };

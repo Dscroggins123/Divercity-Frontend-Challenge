@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+import { useState} from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -12,13 +12,19 @@ import Navbar from "./components/Navbar"
 import "./App.css"
 
 function App() {
+  const [user, setUser] = useState();
+  const handleSetCurrentUser = user => {
+    
+    setUser(user);
+    localStorage.setItem("currentUser", JSON.stringify(user));
+  }
   return (
     <Router>
         <Navbar/>
       <Switch>
         <Route exact path="/" component={() => <Home />} />
         <Route path="/application" component={() => <Application />} />
-        <Route path="/login" component={() => <Login />} />
+        <Route path="/login" component={() => <Login handleSetCurrentUser={handleSetCurrentUser} />} />
       </Switch>
     </Router>
   );
