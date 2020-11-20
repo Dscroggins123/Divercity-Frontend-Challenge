@@ -8,10 +8,13 @@ import {
 import Home from "./pages/home";
 import Application from "./pages/application";
 import Login from "./pages/login";
+import Navbar from "./components/Navbar"
+import "./App.css"
 
 function App() {
   return (
     <Router>
+        <Navbar/>
       <Switch>
         <Route exact path="/" component={() => <Home />} />
         <Route path="/application" component={() => <Application />} />
